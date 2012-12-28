@@ -1,0 +1,28 @@
+{% extends "templates/base.html" %}
+{% block body %}
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Upload Your App</h1>
+            <p>Fill out the fields below to upload your application.</p>
+          </div>
+          <div class="row-fluid">
+            <div>
+              <form action="{{upload_url}}" method="POST" 
+                enctype="multipart/form-data">
+                <label>Application name</label>
+                <input type="text" name="appid">
+                <label>App Description</label>
+                <textarea rows="3" name="description"> 
+                </textarea>
+                <label>Upload File:</label>
+                <input type="file" name="file">
+                <br />
+                <br />
+                <button type="submit" class="btn btn-primary btn-large">
+                  Upload &raquo;
+                </button>
+              </form>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+{% endblock %}

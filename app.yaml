@@ -1,0 +1,38 @@
+application: appscale-appstore
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /static
+  static_dir: static
+
+- url: /
+  script: appstore.app
+
+- url: /apps/(.+)
+  script: appstore.app
+
+- url: /download/(.+)
+  script: appstore.app
+  login: required
+
+- url: /serve.*
+  script: appstore.app
+  login: required
+
+- url: /upload
+  script: appstore.app
+  login: required
+
+- url: /upload-successful
+  script: appstore.app
+  login: required
+
+- url: /upload-internal
+  script: appstore.app
+
+libraries:
+- name: jinja2
+  version: 2.6

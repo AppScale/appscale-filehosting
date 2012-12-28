@@ -1,0 +1,14 @@
+# Ignore python compiled files
+*.py[cod]
+
+# Unit test / coverage reports
+.coverage
+
+# Vim swap files
+*.swp
+
+# Mac OS X-specific files
+*.DS_Store
+
+# PyCharm files
+*.idea

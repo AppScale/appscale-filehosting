@@ -1,0 +1,33 @@
+{% extends "templates/base.html" %}
+{% block body %}
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Welcome to the AppLab!</h1>
+            <p>At the AppLab, you can download Google App Engine applications that probably do really cool stuff! And if there aren't any cool apps here, you can upload some!</p>
+            <p><a class="btn btn-primary btn-large" href="/upload">Upload Your App &raquo;</a></p>
+          </div>
+          <div class="row-fluid">
+            <div>
+              <h2>Applications Currently Hosted:</h2>
+              <table class="table table-hover">
+                <tr>
+                  <td>Name</td>
+                  <td># of Downloads</td>
+                </tr>
+                {% for app_metadatum in app_metadata %}
+                  <tr>
+                    <td>
+                      <a href="/apps/{{app_metadatum['name']}}">
+                        {{ app_metadatum["name"] }}
+                      </a>
+                    </td>
+                    <td>
+                      {{ app_metadatum["download_count"] }}
+                    </td>
+                  </tr>
+                {% endfor %}
+              </table>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+{% endblock %}

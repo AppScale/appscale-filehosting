@@ -1,0 +1,16 @@
+{% extends "templates/base.html" %}
+{% block body %}
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>{{ app_id }}</h1>
+            <p>{{ description }}</p>
+            <p>Uploaded by {{ owner }}</p>
+            <p>This app has {{ download_count }} downloads.</p>
+            <p>
+              <a href="/download/{{app_id}}">
+              Download this app
+              </a>
+            </p>
+          </div>
+        </div><!--/span-->
+{% endblock %}
