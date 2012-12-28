@@ -1,4 +1,6 @@
-AppStore provides a place where Google App Engine applications can be uploaded
-and downloaded.
+AppScale FileHosting is a Google App Engine application that enables users to upload files and let Google host them for you. Of course, you should only upload files that you own - so don't upload illegal stuff!
 
-more readme info to come soon!
+At AppScale Systems, we use FileHosting to host http://download.appscale.com, so that users can download virtual machine images with AppScale pre-installed on them.
+
+Features to come:
+- Only enable a whitelist/regex of users to upload files

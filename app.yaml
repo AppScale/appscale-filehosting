@@ -1,4 +1,4 @@
-application: appscale-appstore
+application: appscale-filehosting
 version: 1
 runtime: python27
 api_version: 1
@@ -9,29 +9,28 @@ handlers:
   static_dir: static
 
 - url: /
-  script: appstore.app
+  script: filehosting.app
 
 - url: /apps/(.+)
-  script: appstore.app
+  script: filehosting.app
 
 - url: /download/(.+)
-  script: appstore.app
-  login: required
+  script: filehosting.app
 
 - url: /serve.*
-  script: appstore.app
-  login: required
+  script: filehosting.app
 
 - url: /upload
-  script: appstore.app
-  login: required
+  script: filehosting.app
+  login: admin
 
 - url: /upload-successful
-  script: appstore.app
-  login: required
+  script: filehosting.app
+  login: admin
 
 - url: /upload-internal
-  script: appstore.app
+  script: filehosting.app
+  login: admin
 
 libraries:
 - name: jinja2

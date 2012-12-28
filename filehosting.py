@@ -24,13 +24,13 @@ jinja_environment = jinja2.Environment(
 
 
 # The maximum number of applications that a single user can upload
-# to the AppLab.
+# to FileHosting.
 MAXIMUM_APPS_UPLOADED_PER_USER = 100
 
 
 class AppMetadata(ndb.Model):
   """AppMetadata represents information about the applications that
-  the AppLab provides access to. Specific fields include:
+  FileHosting provides access to. Specific fields include:
 
   name: The user-provided name of the application. This is the key
     of the item, to avoid having to manually index it.
@@ -49,7 +49,7 @@ class AppMetadata(ndb.Model):
 
 class UserMetadata(ndb.Model):
   """UserMetadata represents information about the users who upload
-  and download apps via the AppLab. Specific fields include:
+  and download apps via FileHosting. Specific fields include:
 
   email: The user's e-mail address. This is the key of the item, to
     avoid having to manually index it.
@@ -77,7 +77,7 @@ class UserMetadata(ndb.Model):
 
 class MainPage(webapp2.RequestHandler):
   """MainPage represents the landing page that users first come to
-  when they access the AppLab. It should list all of the
+  when they access FileHosting. It should list all of the
   applications that we are hosting under some default sort order,
   and enable users to change the sort order for some reasonable
   sort orders.
@@ -214,7 +214,7 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
 
 def get_hosted_app_metadata():
   """get_hosted_app_metadata queries the Datastore for metadata
-  about the applications that the AppLab hosts. It returns this
+  about the applications that FileHosting hosts. It returns this
   data as a dict that can be dumped via JSON, enabling it to be
   easily used by our app in a RESTful manner.
   """
