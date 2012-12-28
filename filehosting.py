@@ -243,13 +243,16 @@ def get_common_template_params():
   user = users.get_current_user()
   if user:
     is_logged_in = True
+    is_admin = users.is_current_user_admin()
     user_name = user.nickname()
   else:
     is_logged_in = False
+    is_admin = False
     user_name = ""
 
   return {
     "is_logged_in" : is_logged_in,
+    "is_admin" : is_admin,
     "user_name" : user_name,
     "login_url" : users.create_login_url("/"),
     "logout_url" : users.create_logout_url("/")
