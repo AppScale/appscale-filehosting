@@ -17,8 +17,9 @@ handlers:
 - url: /download/(.+)
   script: filehosting.app
 
-- url: /serve.*
+- url: /edit/(.+)
   script: filehosting.app
+  login: admin
 
 - url: /upload
   script: filehosting.app

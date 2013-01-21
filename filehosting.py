@@ -164,6 +164,50 @@ class UploadSuccessfulPage(webapp2.RequestHandler):
     self.response.out.write(template.render(template_values))
 
 
+class EditPage(webapp2.RequestHandler):
+  """EditPage provides users with routes letting them edit metadata
+  about the items they've uploaded to this app.
+  """
+
+
+  def get(self, app_id):
+    """Doing a GET on the EditPage should retrieve the current parameters
+    for the given metadata and present them to the user for editing.
+    """
+    app_metadata = AppMetadata.get_by_id(app_id)
+    template_values = get_common_template_params()
+    template_values["app_id"] = app_id
+    template_values["description"] = app_metadata.description
+    template_values["s3_path"] = app_metadata.s3_path
+    template_values["upload_url"] = '/edit/' + app_id
+    template = jinja_environment.get_template('templates/upload.html')
+    self.response.out.write(template.render(template_values))
+
+
+  def post(self, app_id):
+    """Doing a POST on the EditPage should validate the parameters
+    on the form provided by the GET Page, and then update the metadata
+    stored via NDB.
+    """
+    # Get all the params from the form so that we can create a new
+    # AppMetadata from it.
+    # TODO(cgb): Validate these parameters (as well as the app itself)
+    # and abort the upload process if they aren't there.
+    description = self.request.get('description')
+    s3_path = self.request.get('s3_path')
+
+    # Create an AppMetadata object to keep track of the uploaded app
+    # TODO(cgb): The put operation is not guaranteed to succeed.
+    # Catch the exception it can throw if the Datastore is down and
+    # act accordingly.
+    app_metadata = AppMetadata.get_by_id(app_id)
+    app_metadata.s3_path = s3_path
+    app_metadata.description = description
+    app_metadata.put()
+
+    self.redirect('/upload-successful')
+
+
 class UploadHandler(webapp2.RequestHandler):
 
 
@@ -280,6 +324,7 @@ app = webapp2.WSGIApplication([
   ('/', MainPage),
   ('/apps/(.+)', AppsPage),
   ('/download/(.+)', DownloadPage),
+  ('/edit/(.+)', EditPage),
   ('/upload', UploadPage),
   ('/upload-internal', UploadHandler),
   ('/upload-successful', UploadSuccessfulPage)

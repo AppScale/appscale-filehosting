@@ -2,20 +2,22 @@
 {% block body %}
         <div class="span9">
           <div class="hero-unit">
-            <h1>Upload Your App</h1>
-            <p>Fill out the fields below to upload your application.</p>
+            <h1>Upload Your File</h1>
+            <p>Fill out the fields below to upload your file.</p>
           </div>
           <div class="row-fluid">
             <div>
               <form action="{{upload_url}}" method="POST" 
                 enctype="multipart/form-data">
-                <label>Application name</label>
-                <input type="text" name="appid">
+                <label>Filename</label>
+                <input type="text" name="appid"
+                  value="{{ app_id }}">
                 <label>App Description</label>
-                <textarea rows="3" name="description"> 
-                </textarea>
-                <label>S3 URL</label>
-                <input type="text" name="s3_path">
+                <textarea rows="3" name="description">{{ description }}</textarea>
+                <label>S3 Path</label>
+                <input type="text" name="s3_path"
+                  value="{{ s3_path }}">
+                </input>
                 <br />
                 <br />
                 <button type="submit" class="btn btn-primary btn-large">

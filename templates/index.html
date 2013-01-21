@@ -15,6 +15,9 @@
                 <tr>
                   <td>Name</td>
                   <td># of Downloads</td>
+                  {% if is_admin %}
+                  <td>Admin Functions</td>
+                  {% endif %}
                 </tr>
                 {% for app_metadatum in app_metadata %}
                   <tr>
@@ -26,6 +29,14 @@
                     <td>
                       {{ app_metadatum["download_count"] }}
                     </td>
+                    {% if is_admin %}
+                    <td>
+                      <a class="btn btn-primary"
+                        href="/edit/{{app_metadatum['name']}}">
+                          Edit &raquo;
+                      </a>
+                    </td>
+                    {% endif %}
                   </tr>
                 {% endfor %}
               </table>

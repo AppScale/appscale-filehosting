@@ -8,9 +8,16 @@
             <p>This app has {{ download_count }} downloads.</p>
             <p>
               <a href="/download/{{app_id}}">
-              Download this app
+              Download this file
               </a>
             </p>
+            {% if is_admin %}
+            <p>
+              <a href="/edit/{{app_id}}">
+              Edit file metadata
+              </a>
+            </p>
+            {% endif %}
           </div>
         </div><!--/span-->
 {% endblock %}
