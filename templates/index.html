@@ -14,6 +14,7 @@
               <table class="table table-hover">
                 <tr>
                   <td>Name</td>
+                  <td>File Size</td>
                   <td># of Downloads</td>
                   {% if is_admin %}
                   <td>Admin Functions</td>
@@ -25,6 +26,9 @@
                       <a href="/apps/{{app_metadatum['name']}}">
                         {{ app_metadatum["name"] }}
                       </a>
+                    </td>
+                    <td>
+                      {{ app_metadatum["size"] }}
                     </td>
                     <td>
                       {{ app_metadatum["download_count"] }}

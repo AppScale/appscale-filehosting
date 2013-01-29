@@ -37,11 +37,13 @@ class AppMetadata(ndb.Model):
   description: An explanation of what the app does.
   download_count: The number of times that this application has been
     downloaded.
+  size: The size of the file to download.
   owner: The user who uploaded the application.
   """
   s3_path = ndb.StringProperty()
   description = ndb.TextProperty()
   download_count = ndb.IntegerProperty()
+  size = ndb.StringProperty()
   owner = ndb.UserProperty()
 
 
@@ -105,6 +107,7 @@ class AppsPage(webapp2.RequestHandler):
       template_values['app_id'] = app_id
       template_values['description'] = app_metadata.description
       template_values['download_count'] = app_metadata.download_count
+      template_values['size'] = app_metadata.size
       template_values['owner'] = app_metadata.owner.nickname()
     else:
       # TODO(cgb): Find out what we should do if the app_id doesn't
@@ -178,6 +181,7 @@ class EditPage(webapp2.RequestHandler):
     template_values = get_common_template_params()
     template_values["app_id"] = app_id
     template_values["description"] = app_metadata.description
+    template_values["size"] = app_metadata.size
     template_values["s3_path"] = app_metadata.s3_path
     template_values["upload_url"] = '/edit/' + app_id
     template = jinja_environment.get_template('templates/upload.html')
@@ -203,6 +207,7 @@ class EditPage(webapp2.RequestHandler):
     app_metadata = AppMetadata.get_by_id(app_id)
     app_metadata.s3_path = s3_path
     app_metadata.description = description
+    app_metadata.size = self.request.get('size')
     app_metadata.put()
 
     self.redirect('/upload-successful')
@@ -232,6 +237,7 @@ class UploadHandler(webapp2.RequestHandler):
     app_metadata.s3_path = s3_path
     app_metadata.description = description
     app_metadata.download_count = 0
+    app_metadata.size = self.request.get('size')
     app_metadata.owner = users.get_current_user()
     app_metadata.put()
 
@@ -255,7 +261,8 @@ def get_hosted_app_metadata():
   for app_metadatum in app_metadata:
     dict_metadata.append({
       "name" : app_metadatum.key.id(),
-      "download_count" : app_metadatum.download_count
+      "download_count" : app_metadatum.download_count,
+      "size" : app_metadatum.size
     })
 
   return dict_metadata
