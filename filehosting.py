@@ -255,7 +255,7 @@ def get_hosted_app_metadata():
   # in the returned data and hoarded carefully from users (since it
   # is a potential security risk).
 
-  app_metadata = AppMetadata.query()
+  app_metadata = AppMetadata.query().order(-AppMetadata.key)
 
   dict_metadata = []
   for app_metadatum in app_metadata:
