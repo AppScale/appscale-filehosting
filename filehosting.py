@@ -4,6 +4,7 @@
 # General purpose library imports
 import jinja2
 import os
+import re
 import urllib
 import webapp2
 
@@ -259,10 +260,13 @@ def get_hosted_app_metadata():
 
   dict_metadata = []
   for app_metadatum in app_metadata:
+    version = re.search("\d+.\d+.\d+", app_metadatum.key.id()).group()
+    print "[" + version + "]"
     dict_metadata.append({
       "name" : app_metadatum.key.id(),
       "download_count" : app_metadatum.download_count,
-      "size" : app_metadatum.size
+      "size" : app_metadatum.size,
+      "version" : version
     })
 
   return dict_metadata

@@ -10,20 +10,31 @@
           <div class="row-fluid">
             <div>
               <h2>Files Currently Hosted:</h2>
+              <div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+        <h5>Current Release</h5>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body collapse in">
+      <div class="accordion-inner">
               <table class="table table-hover">
                 <tr>
-                  <td>Name</td>
-                  <td>File Size</td>
-                  <td># of Downloads</td>
+                  <td style="border-top: 0">Name</td>
+                  <td style="border-top: 0">File Size</td>
+                  <td style="border-top: 0"># of Downloads</td>
                   {% if is_admin %}
-                  <td>Admin Functions</td>
+                  <td style="border-top: 0">Admin Functions</td>
                   {% endif %}
                 </tr>
-                {% for app_metadatum in app_metadata %}
+
+          {% for app_metadatum in app_metadata %}
+          {% if app_metadatum["version"] == "1.6.8" %}
                   <tr>
                     <td>
                       <a href="/apps/{{app_metadatum['name']}}">
-                        {{ app_metadatum["name"] }}
+                        {{ app_metadatum["name"] }} {{ app_metadatum["version"] }} current
                       </a>
                     </td>
                     <td>
@@ -41,9 +52,66 @@
                     </td>
                     {% endif %}
                   </tr>
+                  {% endif %}
                 {% endfor %}
               </table>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+        <h5>Previous Releases</h5>
+      </a>
+    </div>
+    <div id="collapseTwo" class="accordion-body collapse">
+      <div class="accordion-inner">
+              <table class="table table-hover">
+
+                          <tr>
+                  <td style="border-top: 0">Name</td>
+                  <td style="border-top: 0">File Size</td>
+                  <td style="border-top: 0"># of Downloads</td>
+                  {% if is_admin %}
+                  <td style="border-top: 0">Admin Functions</td>
+                  {% endif %}
+                </tr>
+
+          {% for app_metadatum in app_metadata %}
+          {% if app_metadatum["version"]  != "1.6.7" %}
+                  <tr>
+                    <td>
+                      <a href="/apps/{{app_metadatum['name']}}">
+                        {{ app_metadatum["name"] }} {{ app_metadatum["version"] }} not current
+                      </a>
+                    </td>
+                    <td>
+                      {{ app_metadatum["size"] }}
+                    </td>
+                    <td>
+                      {{ app_metadatum["download_count"] }}
+                    </td>
+                    {% if is_admin %}
+                    <td>
+                      <a class="btn btn-primary"
+                        href="/edit/{{app_metadatum['name']}}">
+                          Edit &raquo;
+                      </a>
+                    </td>
+                    {% endif %}
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+              </table>
+      </div>
+    </div>
+  </div>
+</div>
+
             </div><!--/span-->
           </div><!--/row-->
         </div><!--/span-->
 {% endblock %}
+
+
+
