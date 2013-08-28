@@ -18,6 +18,20 @@
               Edit file metadata
               </a>
             </p>
+            {% else %}
+              <input type="hidden" id="counter" value="1">
+              <script>
+                window.onload = function() {
+                  setInterval(
+                    function() {
+                      var counter = $('#counter').val();
+                      if (counter == '1') {
+                        $('#counter').val('0');
+                        window.location = "/download/{{app_id}}";
+                      }
+                    }, 1000);
+                }
+              </script>
             {% endif %}
           </div>
         </div><!--/span-->
