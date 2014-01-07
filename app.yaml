@@ -36,6 +36,9 @@ handlers:
   script: filehosting.app
   login: admin
 
+builtins:
+- remote_api: on
+
 libraries:
 - name: jinja2
   version: 2.6
