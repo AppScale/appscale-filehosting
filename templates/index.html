@@ -23,7 +23,6 @@
                 <tr>
                   <td style="border-top: 0">Name</td>
                   <td style="border-top: 0">File Size</td>
-                  <td style="border-top: 0"># of Downloads</td>
                   {% if is_admin %}
                   <td style="border-top: 0">Admin Functions</td>
                   {% endif %}
@@ -39,9 +38,6 @@
                     </td>
                     <td>
                       {{ app_metadatum["size"] }}
-                    </td>
-                    <td>
-                      {{ app_metadatum["download_count"] }}
                     </td>
                     {% if is_admin %}
                     <td>
